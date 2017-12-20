@@ -43,7 +43,6 @@ class Validator:
         return verify(root, signature, self.public_key)
 
     def _check_revoked(self, certificate):
-
         response = requests.post(self.base_url + "check_root",
                                  data={"certificate_id": certificate.id}).json()
 
