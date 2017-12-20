@@ -51,7 +51,7 @@ cstr = str(certificates[0])
 cjs = json.loads(cstr)
 c = Certificate.from_json(cjs)
 
-print(c)
+# print(c)
 
 
 

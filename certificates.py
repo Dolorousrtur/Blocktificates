@@ -63,14 +63,12 @@ class BatchIssuer:
 
     def distribute_data(self):
         data = dict()
-        
-        merkleTree = MerkTree(self.certificates)
-        merkleTree.create_tree()
 
-        for certificate in self.certificates:
+        for key in self.certificates:
+            certificate = self.certificates[key]
             data[certificate.id] = {"certificate" : str(certificate), \
                                     "position"    : self.transaction, \
-                                    "hashpath"    : merkleTree.get_hashpath(str(certificate)), \
+                                    "hashpath"    : self.mht.get_hashpath(str(certificate)), \
                                     "signature"   : self.signature}
         return data
 
@@ -80,3 +78,17 @@ class BatchIssuer:
     def revoke(self, student_id, reason=None):
         requests.post(self.base_url + "revoke", data={"certificate_id": self.prefix + student_id, "reason": reason})
 
+
+
+from creator import Certificate
+
+with open('certificates.json', 'r') as f:
+    certificates = json.load(f)
+
+c = Certificate.from_json(certificates[0])
+
+
+certificates_instances = [Certificate.from_json(c) for c in certificates]
+issuer = BatchIssuer(certificates_instances, 'SK2107')
+issuer.publish()
+data = issuer.distribute_data()
