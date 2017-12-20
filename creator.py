@@ -17,6 +17,9 @@ class Certificate:
             'grade': self.grade
         }
 
+    def __str__(self):
+        return json.dumps(self.to_json())
+
 
 
 certificates = []

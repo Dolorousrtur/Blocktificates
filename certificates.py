@@ -4,7 +4,8 @@ import json
 
 class Validator:
     def __init__(self, public_key, prefix):
-        pass
+        self.public_key = public_key
+        self.prefix = prefix
 
     def validate(self, certificate, hashpath, transaction, signature):
         return True
@@ -16,7 +17,7 @@ class Validator:
         return True
 
     def _check_signature(self, root, signature):
-        return True
+        return verify(root, signature, self.public_key)
 
     def _check_revoked(self):
         return True
@@ -37,7 +38,6 @@ class BatchIssuer:
         self.signature = sign(self.mht_root, self.private_key)
 
         self.transaction = None
-
 
 
     def publish(self):
