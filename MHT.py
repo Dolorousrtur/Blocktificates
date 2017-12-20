@@ -107,32 +107,32 @@ class MerkTree:
         return pathes
 
 
-person1 = {'name': 'Bob', 'age': '22'}
-person2 = {'name': 'Alice', 'age': '23'}
-
-json_data1 = open('files/unsigned12.json').read()
-data1 = json.loads(json_data1)
-json_data2 = open('files/unsigned.json').read()
-data2 = json.loads(json_data2)
-json_data3 = open('files/signed.json').read()
-data3 = json.loads(json_data3)
-
-
-
-# b) Give list of transaction
-msg1 = json.dumps(data1, sort_keys=True)
-msg2 = json.dumps(data2, sort_keys=True)
-msg3 = json.dumps(data3, sort_keys=True)
-transaction = [msg1, msg2, msg3]
-
-# c) pass on the transaction list
-Jae_Tree = MerkTree(transaction)
-# Jae_Tree.listoftransaction = transaction
-# Jae_Tree.dataoftransaction = values
-
-
-# d) Create the Merkle Tree transaction
-Jae_Tree.create_tree()
-
-# e) Retrieve the transaction
-past_transaction = Jae_Tree.Get_past_transacion()
+# person1 = {'name': 'Bob', 'age': '22'}
+# person2 = {'name': 'Alice', 'age': '23'}
+#
+# json_data1 = open('files/unsigned12.json').read()
+# data1 = json.loads(json_data1)
+# json_data2 = open('files/unsigned.json').read()
+# data2 = json.loads(json_data2)
+# json_data3 = open('files/signed.json').read()
+# data3 = json.loads(json_data3)
+#
+#
+#
+# # b) Give list of transaction
+# msg1 = json.dumps(data1, sort_keys=True)
+# msg2 = json.dumps(data2, sort_keys=True)
+# msg3 = json.dumps(data3, sort_keys=True)
+# transaction = [msg1, msg2, msg3]
+#
+# # c) pass on the transaction list
+# Jae_Tree = MerkTree(transaction)
+# # Jae_Tree.listoftransaction = transaction
+# # Jae_Tree.dataoftransaction = values
+#
+#
+# # d) Create the Merkle Tree transaction
+# Jae_Tree.create_tree()
+#
+# # e) Retrieve the transaction
+# past_transaction = Jae_Tree.Get_past_transacion()
