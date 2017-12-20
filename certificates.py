@@ -47,7 +47,17 @@ class BatchIssuer:
         return None
 
     def distribute_data(self):
-        return None
+        data = dict()
+        
+        merkleTree = MerkTree(self.sertificates)
+        merkleTree.create_tree()
+
+        for sertificate in self.certificates:
+            data[certificate.id] = {"certificate" : str(certificate), \
+                                    "position"    : self.transaction, \
+                                    "hashpath"    : merkleTree.get_hashpath(certificate_str), \
+                                    "signature"   : self.signature}
+        return data
 
     def create_validator(self):
         return None
