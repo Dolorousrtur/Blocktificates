@@ -9,7 +9,11 @@ class Validator:
         self.prefix = prefix
 
     def validate(self, certificate, hashpath, transaction, signature):
-        return True
+        root = _calculate_root(certificate, hashpath)
+        if _check_position(root, transaction) == True and _check_signature(root, signature) == True and _check_revoked() == True:
+            return True
+        else:
+            return False
 
     def _calculate_root(self, certificate, hashpath):
         message = str(certificate)
@@ -60,7 +64,7 @@ class BatchIssuer:
     def distribute_data(self):
         data = dict()
         
-        merkleTree = MerkTree(self.sertificates)
+        merkleTree = MerkTree(self.certificates)
         merkleTree.create_tree()
 
         for sertificate in self.certificates:
