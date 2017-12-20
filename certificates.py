@@ -61,7 +61,7 @@ class BatchIssuer:
         return None
 
     def create_validator(self):
-        return None
+        return Validator(self.public_key, self.prefix)
 
     def revoke(self, student_id):
         pass
