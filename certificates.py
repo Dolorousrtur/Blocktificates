@@ -1,7 +1,7 @@
 from signatures import generate_keys, sign, verify
 from MHT import MerkTree
 from utils import hash_msg
-import json
+import json, requests
 
 class Validator:
     def __init__(self, public_key, prefix):
@@ -37,6 +37,7 @@ class BatchIssuer:
         self.prefix = prefix
         self.certificates = {prefix + c.id : c for c in certificates}
         self.private_key, self.public_key = generate_keys()
+        self.base_url = 'http://janky.satyarth.me:5000/'
 
 
         certificates_strings = [str(c) for c in certificates]
@@ -51,10 +52,10 @@ class BatchIssuer:
 
 
     def publish(self):
-        pass
+        self.transaction = requests.post(base_url + "push_root", data={"hash": self.mht_root})
 
     def _get_tansaction(self):
-        return None
+        return self.transaction
 
     def distribute_data(self):
         return None
