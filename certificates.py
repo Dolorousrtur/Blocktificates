@@ -54,13 +54,13 @@ class BatchIssuer:
         pass
 
     def _get_tansaction(self):
-        return None
+        return self.transaction
 
     def distribute_data(self):
         return None
 
     def create_validator(self):
-        return None
+        return Validator(self.public_key, self.prefix)
 
     def revoke(self, student_id):
         pass
