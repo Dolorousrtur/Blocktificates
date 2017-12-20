@@ -22,11 +22,13 @@ class Certificate:
 
 
 
+
+
 certificates = []
 
 certificates.append(Certificate(1, 'Ivan Ivanov', '2017-12-21', '87.7'))
 certificates.append(Certificate(2, 'Artur Grigorev', '2017-12-21', '99.7'))
-certificates.append(Certificate(3, 'Sathyarth Mishra Shgiarma', '2017-12-21', '99.7'))
+certificates.append(Certificate(3, 'Sathyarth Mishra Sharma', '2017-12-21', '99.7'))
 certificates.append(Certificate(4, 'Rasul Khasyanov', '2017-12-21', '99.7'))
 certificates.append(Certificate(5, 'Igor Mazhenkov', '2017-12-21', '72.1'))
 certificates.append(Certificate(6, 'Evgeniya Babak', '2017-12-21', '92.2'))
