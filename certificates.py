@@ -1,5 +1,6 @@
 from signatures import generate_keys, sign, verify
 from MHT import MerkTree
+from utils import hash_msg
 import json
 
 class Validator:
@@ -11,7 +12,16 @@ class Validator:
         return True
 
     def _calculate_root(self, certificate, hashpath):
-        return None
+        message = str(certificate)
+
+        node_hash = hash_msg(message)
+        for (hash, side) in hashpath:
+            if side == 'r':
+                node_hash = hash_msg(node_hash + hash)
+            else:
+                node_hash = hash_msg(hash + node_hash)
+
+        return node_hash
 
     def _check_position(self, root, transaction):
         return True
@@ -29,7 +39,7 @@ class BatchIssuer:
         self.private_key, self.public_key = generate_keys()
 
 
-        certificates_strings = [json.dumps(c.to_json()) for c in certificates]
+        certificates_strings = [str(c) for c in certificates]
         self.mht = MerkTree(certificates_strings)
         self.mht.create_tree()
 
