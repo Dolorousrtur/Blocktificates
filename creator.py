@@ -30,4 +30,3 @@ tree.create_tree()
 
 pathes = tree.get_hashpathes()
 
-s = json.dumps(c.to_json())
