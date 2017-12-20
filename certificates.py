@@ -9,8 +9,8 @@ class Validator:
         self.prefix = prefix
 
     def validate(self, certificate, hashpath, transaction, signature):
-        root = _calculate_root(certificate, hashpath)
-        if _check_position(root, transaction) == True and _check_signature(root, signature) == True and _check_revoked() == True:
+        root = self._calculate_root(certificate, hashpath)
+        if self._check_position(root, transaction) == True and self._check_signature(root, signature) == True and self._check_revoked() == True:
             return True
         else:
             return False
@@ -56,7 +56,7 @@ class BatchIssuer:
 
 
     def publish(self):
-        self.transaction = requests.post(base_url + "push_root", data={"hash": self.mht_root})
+        self.transaction = requests.post(self.base_url + "push_root", data={"hash": self.mht_root})
 
     def _get_tansaction(self):
         return self.transaction
@@ -67,10 +67,10 @@ class BatchIssuer:
         merkleTree = MerkTree(self.certificates)
         merkleTree.create_tree()
 
-        for sertificate in self.certificates:
+        for certificate in self.certificates:
             data[certificate.id] = {"certificate" : str(certificate), \
                                     "position"    : self.transaction, \
-                                    "hashpath"    : merkleTree.get_hashpath(certificate_str), \
+                                    "hashpath"    : merkleTree.get_hashpath(str(certificate)), \
                                     "signature"   : self.signature}
         return data
 
@@ -78,5 +78,5 @@ class BatchIssuer:
         return Validator(self.public_key, self.prefix)
 
     def revoke(self, student_id, reason=None):
-        requests.post(base_url + "revoke", data={"certificate_id": prefix + student_id, "reason": reason})
+        requests.post(self.base_url + "revoke", data={"certificate_id": self.prefix + student_id, "reason": reason})
 
