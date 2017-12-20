@@ -17,7 +17,7 @@ class Validator:
         if not self._check_signature(root, signature):
             return False
 
-        if not self._check_revoked():
+        if not self._check_revoked(certificate):
             return False
 
         return True
