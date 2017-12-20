@@ -3,30 +3,40 @@ from MHT import MerkTree
 
 
 class Certificate:
-    def __init__(self, name, date, grade):
+    def __init__(self, student_id, name, date, grade):
+        self.id = student_id
         self.name = name
         self.date = date
         self.grade = grade
 
     def to_json(self):
         return {
+            'student_id': self.id,
             'name': self.name,
             'date': self.date,
             'grade': self.grade
         }
 
 
-c1 = Certificate('Ivan Ivanov', '2018-01-01', '87.7')
-c2 = Certificate('Artur Grigorev', '2018-01-01', '97.7')
-c3 = Certificate('Sathyarth Mishra Sharma', '2018-01-01', '98.7')
-c4 = Certificate('Rasul Khasyanov', '2018-01-01', '99.7')
 
-certificates = [c1, c2, c3, c4]
+certificates = []
 
-messages = [json.dumps(c.to_json()) for c in certificates]
+certificates.append(Certificate(1, 'Ivan Ivanov', '2017-12-21', '87.7'))
+certificates.append(Certificate(2, 'Artur Grigorev', '2017-12-21', '99.7'))
+certificates.append(Certificate(3, 'Sathyarth Mishra Sharma', '2017-12-21', '99.7'))
+certificates.append(Certificate(4, 'Rasul Khasyanov', '2017-12-21', '99.7'))
+certificates.append(Certificate(5, 'Igor Mazhenkov', '2017-12-21', '72.1'))
+certificates.append(Certificate(6, 'Evgeniya Babak', '2017-12-21', '92.2'))
+certificates.append(Certificate(7, 'Irina Vihrova', '2017-12-21', '89.2'))
 
-tree = MerkTree(messages)
-tree.create_tree()
 
-pathes = tree.get_hashpathes()
+certificates_json = [c.to_json() for c in certificates]
+
+with open('certificates.json', 'w') as f:
+    json.dump(certificates_json, f)
+
+# tree = MerkTree(messages)
+# tree.create_tree()
+
+# pathes = tree.get_hashpathes()
 

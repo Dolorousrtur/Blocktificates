@@ -6,6 +6,6 @@ def hash_msg(msg=""):
         msg = json.dumps(msg,sort_keys=True)  # If we don't sort keys, we can't guarantee repeatability!
         
     if sys.version_info.major == 2:
-        return hashlib.sha256(msg).hexdigest().encode()
+        return hashlib.sha1(msg).hexdigest().encode()
     else:
-        return hashlib.sha256(str(msg).encode('utf-8')).hexdigest()
+        return hashlib.sha1(str(msg).encode('utf-8')).hexdigest()
