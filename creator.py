@@ -32,6 +32,8 @@ certificates.append(Certificate(7, 'Irina Vihrova', '2017-12-21', '89.2'))
 
 certificates_json = [c.to_json() for c in certificates]
 
+print(json.dumps(certificates_json[0]))
+
 with open('certificates.json', 'w') as f:
     json.dump(certificates_json, f)
 

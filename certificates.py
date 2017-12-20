@@ -1,4 +1,6 @@
-
+from signatures import generate_keys, sign, verify
+from MHT import MerkTree
+import json
 
 class Validator:
     def __init__(self, public_key, prefix):
@@ -21,16 +23,22 @@ class Validator:
 
 class BatchIssuer:
     def __init__(self, certificates, prefix):
-        pass
+        self.prefix = prefix
+        self.certificates = {prefix + c.id : c for c in certificates}
+        self.private_key, self.public_key = generate_keys()
 
-    def _get_root(self):
-        return None
 
-    def _get_path(self):
-        return None
+        certificates_strings = [json.dumps(c.to_json()) for c in certificates]
+        self.mht = MerkTree(certificates_strings)
+        self.mht.create_tree()
 
-    def _get_root_signature(self):
-        return None
+        self.mht_root = self.mht.Get_Root_leaf()
+
+        self.signature = sign(self.mht_root, self.private_key)
+
+        self.transaction = None
+
+
 
     def publish(self):
         pass
