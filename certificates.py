@@ -28,7 +28,16 @@ class Validator:
         return node_hash
 
     def _check_position(self, root, transaction):
-        return True
+        response = requests.post(self.base_url + "check_root",
+                                 data={"hash": root,
+                                       "txhash": transaction}).json()
+
+        if response['valid']:
+            return True
+
+        return False
+
+
 
     def _check_signature(self, root, signature):
         return verify(root, signature, self.public_key)
@@ -56,7 +65,9 @@ class BatchIssuer:
 
 
     def publish(self):
-        self.transaction = requests.post(self.base_url + "push_root", data={"hash": self.mht_root})
+        response = requests.post(self.base_url + "push_root",
+                                 data={"hash": self.mht_root}).json()
+        self.transaction = response['txhash']
 
     def _get_tansaction(self):
         return self.transaction
