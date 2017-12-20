@@ -47,9 +47,9 @@ class Validator:
                                  data={"certificate_id": certificate.id}).json()
 
         if response['revoked']:
-            return False
+            return True
 
-        return True
+        return False
 
 class BatchIssuer:
     def __init__(self, certificates, prefix):
