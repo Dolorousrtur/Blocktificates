@@ -35,7 +35,7 @@ class Validator:
 class BatchIssuer:
     def __init__(self, certificates, prefix):
         self.prefix = prefix
-        self.certificates = {prefix + c.id : c for c in certificates}
+        self.certificates = {prefix + str(c.id) : c for c in certificates}
         self.private_key, self.public_key = generate_keys()
         self.base_url = 'http://janky.satyarth.me:5000/'
 

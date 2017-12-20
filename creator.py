@@ -17,6 +17,16 @@ class Certificate:
             'grade': self.grade
         }
 
+    def from_json(dic):
+
+        id = dic['student_id']
+        name = dic['name']
+        date = dic['date']
+        grade = dic['grade']
+
+        return Certificate(id, name, date, grade)
+
+
     def __str__(self):
         return json.dumps(self.to_json())
 
@@ -37,10 +47,18 @@ certificates.append(Certificate(7, 'Irina Vihrova', '2017-12-21', '89.2'))
 
 certificates_json = [c.to_json() for c in certificates]
 
-print(json.dumps(certificates_json[0]))
+cstr = str(certificates[0])
+cjs = json.loads(cstr)
+c = Certificate.from_json(cjs)
 
-with open('certificates.json', 'w') as f:
-    json.dump(certificates_json, f)
+print(c)
+
+
+
+# print(json.dumps(certificates_json[0]))
+#
+# with open('certificates.json', 'w') as f:
+#     json.dump(certificates_json, f)
 
 # tree = MerkTree(messages)
 # tree.create_tree()
