@@ -73,6 +73,6 @@ class BatchIssuer:
     def create_validator(self):
         return Validator(self.public_key, self.prefix)
 
-    def revoke(self, student_id):
-        pass
+    def revoke(self, student_id, reason=None):
+        requests.post(base_url + "revoke", data={"certificate_id": prefix + student_id, "reason": reason})
 
