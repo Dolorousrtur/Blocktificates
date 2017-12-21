@@ -34,22 +34,22 @@ class Certificate:
 
 
 
-certificates = []
-
-certificates.append(Certificate(1, 'Ivan Ivanov', '2017-12-21', '87.7'))
-certificates.append(Certificate(2, 'Artur Grigorev', '2017-12-21', '99.7'))
-certificates.append(Certificate(3, 'Sathyarth Mishra Sharma', '2017-12-21', '99.7'))
-certificates.append(Certificate(4, 'Rasul Khasyanov', '2017-12-21', '99.7'))
-certificates.append(Certificate(5, 'Igor Mazhenkov', '2017-12-21', '72.1'))
-certificates.append(Certificate(6, 'Evgeniya Babak', '2017-12-21', '92.2'))
-certificates.append(Certificate(7, 'Irina Vihrova', '2017-12-21', '89.2'))
-
-
-certificates_json = [c.to_json() for c in certificates]
-
-cstr = str(certificates[0])
-cjs = json.loads(cstr)
-c = Certificate.from_json(cjs)
+# certificates = []
+#
+# certificates.append(Certificate(1, 'Ivan Ivanov', '2017-12-21', '87.7'))
+# certificates.append(Certificate(2, 'Artur Grigorev', '2017-12-21', '99.7'))
+# certificates.append(Certificate(3, 'Sathyarth Mishra Sharma', '2017-12-21', '99.7'))
+# certificates.append(Certificate(4, 'Rasul Khasyanov', '2017-12-21', '99.7'))
+# certificates.append(Certificate(5, 'Igor Mazhenkov', '2017-12-21', '72.1'))
+# certificates.append(Certificate(6, 'Evgeniya Babak', '2017-12-21', '92.2'))
+# certificates.append(Certificate(7, 'Irina Vihrova', '2017-12-21', '89.2'))
+#
+#
+# certificates_json = [c.to_json() for c in certificates]
+#
+# cstr = str(certificates[0])
+# cjs = json.loads(cstr)
+# c = Certificate.from_json(cjs)
 
 # print(c)
 

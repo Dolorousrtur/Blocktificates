@@ -54,9 +54,9 @@ class Validator:
                                  data={"certificate_id": certificate.id}).json()
 
         if response['revoked']:
-            return True
+            return False
 
-        return False
+        return True
 
 class BatchIssuer:
     def __init__(self, certificates, prefix):
@@ -110,27 +110,27 @@ class BatchIssuer:
         requests.post(self.base_url + "revoke", data={"certificate_id": certificate_id, "reason": reason})
 
 
-
-from creator import Certificate
-
-with open('certificates.json', 'r') as f:
-    certificates = json.load(f)
-
-c = Certificate.from_json(certificates[0])
-
-
-certificates_instances = [Certificate.from_json(c) for c in certificates]
-issuer = BatchIssuer(certificates_instances, 'SK2017')
-issuer.publish()
-data = issuer.distribute_data()
-data1 = data[1]
-data2 = data[2]
-
-
-validator = issuer.create_validator()
-
-print(validator.validate(data1['certificate'], data1['hashpath'], data1['position'], data1['signature']))
-
-issuer.revoke(1, "H@H@H@H@")
-
-print(validator.validate(data1['certificate'], data1['hashpath'], data1['position'], data1['signature']))
+#
+# from creator import Certificate
+#
+# with open('certificates.json', 'r') as f:
+#     certificates = json.load(f)
+#
+# c = Certificate.from_json(certificates[0])
+#
+#
+# certificates_instances = [Certificate.from_json(c) for c in certificates]
+# issuer = BatchIssuer(certificates_instances, 'SK2011')
+# issuer.publish()
+# data = issuer.distribute_data()
+# data1 = data[1]
+# data2 = data[2]
+#
+#
+# validator = issuer.create_validator()
+#
+# print(validator.validate(data1['certificate'], data1['hashpath'], data1['position'], data1['signature']))
+#
+# issuer.revoke(1, "H@H@H@H@")
+#
+# print(validator.validate(data1['certificate'], data1['hashpath'], data1['position'], data1['signature']))
